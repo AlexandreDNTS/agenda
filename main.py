@@ -17,7 +17,7 @@ def tela_login():
         [sg.Text('usuário')],
         [sg.Input(key='usuarioL')],
         [sg.Text('senha')],
-        [sg.Input(key='senhaL')],
+        [sg.Input(key='senhaL', password_char='*')],
         [sg.Text('', key='msgL')],
         [sg.Button('LOGIN')]
     ]
@@ -31,16 +31,16 @@ def tela_cadastro():
         [sg.Text('usuário')],
         [sg.Input(key='usuarioC')],
         [sg.Text('senha')],
-        [sg.Input(key='senhaC')],
+        [sg.Input(key='senhaC', password_char='*')],
         [sg.Text('confirmar senha')],
-        [sg.Input(key='Consenha')],
+        [sg.Input(key='Consenha', password_char='*')],
         [sg.Text('', key='msgC')],
         [sg.Button('CADASTRAR')]
     ]
     return sg.Window('AGENDA-CADASTRO', layout=layout, finalize=True, size=(600, 400))
 
 
-telaInicial, TelaLogin, telaCadastro = tela_inicial(), None, None
+telaInicial, TelaLogin, telaCadastro, telaAgenda = tela_inicial(), None, None, None
 
 while True:
     window, eventos, valores = sg.read_all_windows()
@@ -68,3 +68,6 @@ while True:
             window['msgC'].update('as senhas devem ser iguais')
         else:
             window['msgC'].update('')
+
+            telaCadastro.hide()
+            telaInicial.un_hide()
