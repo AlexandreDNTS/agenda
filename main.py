@@ -7,7 +7,7 @@ def tela_inicial():
         [sg.Text('\n\n')],
         [sg.Button('login'), sg.Button('cadastro')]
     ]
-    return sg.Window('AGENDA', layout=layout, finalize=True)
+    return sg.Window('AGENDA', layout=layout, finalize=True, size=(600, 400))
 
 
 def tela_login():
@@ -21,7 +21,7 @@ def tela_login():
         [sg.Text('', key='msgL')],
         [sg.Button('LOGIN')]
     ]
-    return sg.Window('AGENDA-LOGIN', layout=layout, finalize=True)
+    return sg.Window('AGENDA-LOGIN', layout=layout, finalize=True, size=(600, 400))
 
 
 def tela_cadastro():
@@ -37,7 +37,7 @@ def tela_cadastro():
         [sg.Text('', key='msgC')],
         [sg.Button('CADASTRAR')]
     ]
-    return sg.Window('AGENDA-CADASTRO', layout=layout, finalize=True)
+    return sg.Window('AGENDA-CADASTRO', layout=layout, finalize=True, size=(600, 400))
 
 
 telaInicial, TelaLogin, telaCadastro = tela_inicial(), None, None
