@@ -18,7 +18,7 @@ def tela_login():
         [sg.Input(key='usuarioL')],
         [sg.Text('senha')],
         [sg.Input(key='senhaL')],
-        [sg.Text('', key='msg')],
+        [sg.Text('', key='msgL')],
         [sg.Button('LOGIN')]
     ]
     return sg.Window('AGENDA-LOGIN', layout=layout, finalize=True)
@@ -33,7 +33,7 @@ def tela_cadastro():
         [sg.Text('senha')],
         [sg.Input(key='senhaC')],
         [sg.Text('confirmar senha')],
-        [sg.Input(key='Csenha')],
+        [sg.Input(key='Consenha')],
         [sg.Text('', key='msgC')],
         [sg.Button('CADASTRAR')]
     ]
@@ -53,3 +53,18 @@ while True:
     if window == telaInicial and eventos == 'cadastro':
         telaCadastro = tela_cadastro()
         telaInicial.hide()
+
+    # validações
+
+    if window == TelaLogin and eventos == 'LOGIN':
+        if valores['usuarioL'] == '' or valores['senhaL'] == '':
+            window['msgL'].update('todos os campos devem ser preenchidos')
+        else:
+            window['msgL'].update('')
+    if window == telaCadastro and eventos == 'CADASTRAR':
+        if valores['usuarioC'] == '' or valores['senhaC'] == '' or valores['Consenha'] == '':
+            window['msgC'].update('todos os campos devem ser preenchidos')
+        elif valores['senhaC'] != valores['Consenha']:
+            window['msgC'].update('as senhas devem ser iguais')
+        else:
+            window['msgC'].update('')
