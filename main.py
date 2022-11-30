@@ -1,6 +1,10 @@
 import PySimpleGUI as sg
 
 
+usuario = []
+senha = []
+
+
 def tela_inicial():
     layout = [
         [sg.Text('\n\n\t\tAGENDA\t\t')],
@@ -54,20 +58,25 @@ while True:
         telaCadastro = tela_cadastro()
         telaInicial.hide()
 
-    # validações
-
     if window == TelaLogin and eventos == 'LOGIN':
         if valores['usuarioL'] == '' or valores['senhaL'] == '':
             window['msgL'].update('todos os campos devem ser preenchidos')
         else:
-            window['msgL'].update('')
+            for i in range(0, len(usuario)):
+                if valores['usuarioL'] == usuario[i] and valores['senhaL'] == senha[i]:
+                    window['msgL'].update('usuário logado')
+
+                else:
+                    window['msgL'].update('usuário ou senha incorreto!')
+
     if window == telaCadastro and eventos == 'CADASTRAR':
         if valores['usuarioC'] == '' or valores['senhaC'] == '' or valores['Consenha'] == '':
             window['msgC'].update('todos os campos devem ser preenchidos')
         elif valores['senhaC'] != valores['Consenha']:
             window['msgC'].update('as senhas devem ser iguais')
         else:
+            usuario.append(valores['usuarioC'])
+            senha.append(valores['senhaC'])
             window['msgC'].update('')
-
             telaCadastro.hide()
             telaInicial.un_hide()
