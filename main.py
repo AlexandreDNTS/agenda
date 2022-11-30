@@ -82,5 +82,8 @@ while True:
                 else:
                     usuario.append(valores['usuarioC'])
                     senha.append(valores['senhaC'])
+                    with open('usuarios.txt', 'a') as arquivo:
+                        for valor in usuario:
+                            arquivo.write(valor + '\n')
                     telaCadastro.hide()
                     telaInicial.un_hide()
