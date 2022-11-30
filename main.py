@@ -1,13 +1,13 @@
 import PySimpleGUI as sg
 
 
-usuario = []
-senha = []
+usuario = ['francimar']
+senha = ['12345']
 
 
 def tela_inicial():
     layout = [
-        [sg.Text('\n\n\t\tAGENDA\t\t')],
+        [sg.Text('\n\n\t\t\t\tAGENDA\t\t')],
         [sg.Text('\n\n')],
         [sg.Button('login'), sg.Button('cadastro')]
     ]
@@ -23,7 +23,8 @@ def tela_login():
         [sg.Text('senha')],
         [sg.Input(key='senhaL', password_char='*')],
         [sg.Text('', key='msgL')],
-        [sg.Button('LOGIN')]
+        [sg.Button('LOGIN'), sg.Button('CADASTRAR')],
+        [sg.Button('voltar')]
     ]
     return sg.Window('AGENDA-LOGIN', layout=layout, finalize=True, size=(600, 400))
 
@@ -75,8 +76,11 @@ while True:
         elif valores['senhaC'] != valores['Consenha']:
             window['msgC'].update('as senhas devem ser iguais')
         else:
-            usuario.append(valores['usuarioC'])
-            senha.append(valores['senhaC'])
-            window['msgC'].update('')
-            telaCadastro.hide()
-            telaInicial.un_hide()
+            for i in range(0, len(usuario)):
+                if valores['usuarioC'] == usuario[i]:
+                    window['msgC'].update('nome de usuário já existe')
+                else:
+                    usuario.append(valores['usuarioC'])
+                    senha.append(valores['senhaC'])
+                    telaCadastro.hide()
+                    telaInicial.un_hide()
