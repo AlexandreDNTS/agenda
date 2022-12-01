@@ -1,8 +1,8 @@
 import PySimpleGUI as sg
 
 
-usuario = ['francimar']
-senha = ['12345']
+usuario = [' ']
+senha = [' ']
 
 
 def tela_inicial():
@@ -45,9 +45,21 @@ def tela_cadastro():
     return sg.Window('AGENDA-CADASTRO', layout=layout, finalize=True, size=(600, 400))
 
 
-telaInicial, TelaLogin, telaCadastro, telaAgenda = tela_inicial(), None, None, None
+def tela_usuario():
+    layout = [
+        [sg.Text('\n\n\t\tAGENDA - USUÁRIO\t\t')],
+        [sg.Text('\n\n')],
+        [sg.Text('', key='nomeUsuario')],
+        [sg.Combo('agenda', 'menu')]
+    ]
+    return sg.Window('AGENDA-USUÁRIO', layout=layout, finalize=True, size=(600, 400))
+
+
+telaInicial, TelaLogin, telaCadastro, telaAgenda, telaUsuario = tela_inicial(
+), None, None, None, None
 
 while True:
+
     window, eventos, valores = sg.read_all_windows()
 
     if eventos == sg.WIN_CLOSED:
@@ -58,15 +70,21 @@ while True:
     if window == telaInicial and eventos == 'cadastro':
         telaCadastro = tela_cadastro()
         telaInicial.hide()
-
+    if window == TelaLogin and eventos == 'voltar':
+        TelaLogin.hide()
+        telaInicial.un_hide()
+    if window == TelaLogin and eventos == 'CADASTRAR':
+        telaCadastro = tela_cadastro()
+        TelaLogin.hide()
     if window == TelaLogin and eventos == 'LOGIN':
+
         if valores['usuarioL'] == '' or valores['senhaL'] == '':
             window['msgL'].update('todos os campos devem ser preenchidos')
         else:
             for i in range(0, len(usuario)):
                 if valores['usuarioL'] == usuario[i] and valores['senhaL'] == senha[i]:
-                    window['msgL'].update('usuário logado')
-
+                    telaUsuario = tela_usuario()
+                    TelaLogin.hide()
                 else:
                     window['msgL'].update('usuário ou senha incorreto!')
 
@@ -82,8 +100,5 @@ while True:
                 else:
                     usuario.append(valores['usuarioC'])
                     senha.append(valores['senhaC'])
-                    with open('usuarios.txt', 'a') as arquivo:
-                        for valor in usuario:
-                            arquivo.write(valor + '\n')
                     telaCadastro.hide()
                     telaInicial.un_hide()
