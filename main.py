@@ -1,6 +1,5 @@
 import PySimpleGUI as sg
 
-
 usuario = [' ']
 senha = [' ']
 
@@ -9,8 +8,9 @@ def tela_inicial():
     layout = [
         [sg.Text('\n\n\t\t\t\tAGENDA\t\t')],
         [sg.Text('\n\n')],
-        [sg.Button('login'), sg.Button('cadastro')]
-    ]
+        [sg.Button('login',size=(15,2))], 
+        [sg.Button('cadastro',size=(15,2))]
+        ]
     return sg.Window('AGENDA', layout=layout, finalize=True, size=(600, 400))
 
 
@@ -23,8 +23,8 @@ def tela_login():
         [sg.Text('senha')],
         [sg.Input(key='senhaL', password_char='*')],
         [sg.Text('', key='msgL')],
-        [sg.Button('LOGIN'), sg.Button('CADASTRAR')],
-        [sg.Button('voltar')]
+        [sg.Button('LOGIN',size=(15,2)), sg.Button('CADASTRAR',size=(15,2))],
+        [sg.Button('voltar',size=(15,2))]
     ]
     return sg.Window('AGENDA-LOGIN', layout=layout, finalize=True, size=(600, 400))
 
@@ -40,7 +40,7 @@ def tela_cadastro():
         [sg.Text('confirmar senha')],
         [sg.Input(key='Consenha', password_char='*')],
         [sg.Text('', key='msgC')],
-        [sg.Button('CADASTRAR')]
+        [sg.Button('CADASTRAR',size=(15,2))]
     ]
     return sg.Window('AGENDA-CADASTRO', layout=layout, finalize=True, size=(600, 400))
 
@@ -50,8 +50,7 @@ def tela_usuario():
         [sg.Text('\n\n\t\tAGENDA - USUÁRIO\t\t')],
         [sg.Text('\n\n')],
         [sg.Text('', key='nomeUsuario')],
-        [sg.Combo('agenda', 'menu')]
-    ]
+        ]
     return sg.Window('AGENDA-USUÁRIO', layout=layout, finalize=True, size=(600, 400))
 
 
