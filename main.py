@@ -2,7 +2,6 @@ import PySimpleGUI as sg
 
 usuario = ['francimar']
 senha = ['1']
-usuarioLOGADO = []
 
 def tela_inicial():
     layout = [
@@ -19,7 +18,7 @@ def tela_login():
     layout = [
         [sg.Text('\n\n\t\tAGENDA - LOGIN\t\t',text_color='black')],
         [sg.Text('\n\n')],
-        [sg.Text('usuário',text_color='black')],
+        [sg.Text('usuário',text_colsizeor='black')],
         [sg.Input(key='usuarioL')],
         [sg.Text('senha',text_color='black')],
         [sg.Input(key='senhaL', password_char='*')],
@@ -27,8 +26,7 @@ def tela_login():
         [sg.Button('LOGIN',size=(15,2),button_color='blue'), sg.Button('CADASTRAR',size=(15,2),button_color='blue')],
         [sg.Button('voltar',size=(15,2),button_color='blue')]
     ]
-    return sg.Window('AGENDA-LOGIN', layout=layout, finalize=True, size=(600, 400))
-
+    return sg.Window('AGENDA-LOGIN',layout=layout,finalize=True,size=(600,400))
 
 def tela_cadastro():
     layout = [
@@ -54,14 +52,8 @@ def tela_usuario():
         ]
     return sg.Window('AGENDA-USUÁRIO', layout=layout, finalize=True, size=(600, 400))
 
-def tela_configuracao():
-    layout=[
-        [sg.Text('\n\t\tAGENDA - CONFIGURAÇÕES\t')]
-    ]
-    return sg.Window('CONFIGURAÇÕES',layout=layout,finalize=True,size=(600,400))
-
 telaInicial, TelaLogin, telaCadastro, telaAgenda, telaUsuario,telaConfiguracao = tela_inicial(
-), None, None, None, None,None
+), None, None, None, None, None
 
 while True:
 
@@ -81,9 +73,7 @@ while True:
     if window == TelaLogin and eventos == 'CADASTRAR':
         telaCadastro = tela_cadastro()
         TelaLogin.hide()
-    if window == telaInicial and eventos == 'configuração':
-        telaConfiguracao = tela_configuracao()
-        telaInicial.hide()
+
     if window == TelaLogin and eventos == 'LOGIN':
 
         if valores['usuarioL'] == '' or valores['senhaL'] == '' or valores['usuarioL']==' ' or valores['senhaL'] == ' ':
@@ -110,4 +100,3 @@ while True:
                     senha.append(valores['senhaC'])
                     telaCadastro.hide()
                     telaInicial.un_hide()
-    
